@@ -7,7 +7,7 @@ $conf = array(
     'DB_USER'                    =>     'root',
     'DB_PWD'                     =>     '',
     'DB_NAME'                    =>     'mysqldata',
-    'DB_PORT'                    =>     ''`,
+    'DB_PORT'                    =>     '',
     
 	//'配置项'=>'配置值'
 	'TOKEN_ON'					=> false,
