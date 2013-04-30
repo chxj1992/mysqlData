@@ -1,0 +1,187 @@
+
+    <!-- 计算工具面板 -->
+    <div id="tool-board" class="well well-large">
+        <a class='btn btn-danger offset6 isadvance-btn'>Advenced</a>       
+        <a class='btn btn-warning offset6 isadvance-btn' style="display:none;">Nomal</a>       
+        <br />
+        <div id="normal" class="mode">
+            <h5> 
+                查询字段(SELECT)   
+                <i class="icon-plus-sign" id="add-show" style="margin-left:10px;"> </i>
+            </h5>
+            <div id="show-block">
+                <div style="display:none;" id="show-eg">
+                    <div class="show-div">
+                        <select name="field" class="span4 show">
+                            <volist name="field" id="vo">
+                                <option value="{$key}">{$vo}</option>  
+                            </volist>
+                        </select>
+
+                        <select class="span4 show" name="func">
+                            <option value="">  </option>  
+                            <option value="SUM"> SUM </option>  
+                            <option value="DATE_FORMAT"> DATE_FORMAT </option>  
+                            <option value="MAX"> MAX </option>  
+                            <option value="MIN"> MIN </option>  
+                            <option value="COUNT"> COUNT </option>  
+                        </select>
+                        <input type="text" class="input span3 show" name="param" />
+                        <i class="icon-minus-sign del-show"> </i>
+                    </div>
+                </div>
+                <?php
+                ?>
+                <volist name="condition.show" id="show">
+                    <div class="show-div">
+                        <select name="field" class="span4 show">
+                            <?php
+                                if ( $show['func'] ) { 
+                                    $show['field'] = $show['field'].'1'.$show['func'];
+                                }
+                            ?> 
+
+                            <option value="{$show.field}"> 
+                                <?php
+                                    echo getOneField($show['field']); 
+                                ?> 
+                            </option>  
+                            <volist name="field" id="vo">
+                                <?php
+                                if( $key == $show['field']){
+                                    continue;  
+                                }
+                                ?>
+                                <option value="{$key}">{$vo}</option>  
+                            </volist>
+                        </select>
+
+                        <select class="span4 show" name="func">
+                            <option value="{$show.func}"> <?php echo getFuncName($show['func']); ?> </option>  
+                            <volist name="functions" id="vo">
+                                <?php
+                                if( $key == $show['func']){
+                                    continue;  
+                                }
+                                ?>
+                                <option value="{$key}"> {$vo} </option>  
+                            </volist>
+                        </select>
+                        <input type="text" class="input span3 show" name="param" value="{$show.param}" />
+                        <i class="icon-minus-sign del-show"> </i>
+                    </div>
+                </volist>
+
+            </div>
+
+
+            <h5> 
+                筛选器(WHERE)   
+                <i class="icon-plus-sign" id="add-where" style="margin-left:10px;"> </i>
+            </h5>
+            <div id="where-block">
+                <div style="display:none;" id="where-eg">
+                    <div class="where-div">
+                        <select class="span4" name="field">
+                            <volist name="field" id="vo">
+                                <option value="{$key}">{$vo}</option>  
+                            </volist>
+                        </select>
+                        <select class="span3" name="sign">
+                            <option value="="> = </option>  
+                            <option value="<"> &lt; </option>  
+                            <option value=">"> &gt; </option>  
+                            <option value="<>"> &lt;&gt; </option>  
+                            <option value="LIKE"> LIKE </option>  
+                            <option value="IN"> IN </option>  
+                        </select>
+                        <input type="text" class="input span4" name="value" />
+                        <i class="icon-minus-sign del-where"> </i>
+                    </div>
+                </div>
+            </div>
+
+            <h5> 
+                分组器(GROUP)   
+                <i class="icon-plus-sign" id="add-group" style="margin-left:10px;"> </i>
+            </h5>
+            <div id="group-block">
+                <div style="display:none;" id="group-eg">
+                    <div class="group-div">
+                        <select class="span6" name="field">
+                            <volist name="field" id="vo">
+                                <option value="{$key}">{$vo}</option>  
+                            </volist>
+                        </select>
+                        <i class="icon-minus-sign del-group offset2"> </i>
+                    </div>
+                </div>
+            </div>
+
+
+            <h5> 
+                排序(ORDER)   
+                <i class="icon-plus-sign" id="add-order" style="margin-left:10px;"> </i>
+            </h5>
+            <div id="order-block">
+                <div style="display:none;" id="order-eg">
+                    <div class="order-div">
+                        <select class="span4" name="field">
+                            <volist name="field" id="vo">
+                                <option value="{$key}">{$vo}</option>  
+                            </volist>
+                        </select>
+                        <select class="span4" name="order">
+                            <option value="ASC"> 正序 </option>  
+                            <option value="DESC"> 倒序 </option>  
+                        </select>
+                        <i class="icon-minus-sign del-order offset1"> </i>
+                    </div>
+                </div>
+
+            </div>
+
+            <h5> 
+                自定义字段 &nbsp;
+                <select class="span4" id="field-select">
+                    <volist name="field" id="vo">
+                        <option value="{$key}">{$vo}</option>  
+                    </volist>
+                </select>
+                <i class="icon-plus-sign" id="add-field" style="margin-left:10px;"> </i>
+            </h5>
+            <div id="field-div">
+                <textarea id="field-area" name="field" rows="5" cols="30"></textarea>
+            </div>
+
+
+            <h5> 
+                分页(LIMIT)   
+                <div id="limit-block" style="display:inline;">
+                    <input type="text" id="limit" class="input span4 offset1" placeholder="{$psize}" />
+                </div>
+            </h5>
+        </div>
+        
+        <div class="mode" style="display:none;">
+            <h5> 
+                自定义SQL
+            </h5>
+            (注意，要执行的SQL语句必须以SELECT开头) 
+            <textarea id="form-sql" rows="10" cols="30"></textarea> 
+        </div>
+
+        <input type="hidden" id="isadvance" isadvance /> 
+
+        <hr />
+        <a class="btn btn-warning offset0" id="submit-unset-btn">
+            Unset
+        </a>
+        <a class="btn btn-success offset0" id="submit-calcu-btn">
+            Set
+        </a>
+        <a class="btn btn-info offset2" id="to-draw-btn" href="#myModal" >
+            Next
+        </a>
+    </div>
+

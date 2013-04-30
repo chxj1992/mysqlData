@@ -1,0 +1,40 @@
+<include file="Public:header" /> 
+<include file="Public:progress" />
+
+    <div class="row-fluid">
+        <div class="alert alert-block alert-warning">
+            <h4> 提示 </h4>
+            <p style="line-height:35px;">
+            &nbsp;&nbsp;在这里，您可以对所选择的源数据进行多次处理，在最终得到所需要的数据后，您可以点击下一步，进行生成图像的相关操作。
+            </p>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+
+    <div id="board" class="span2">
+        <legend>
+            <span style="margin:20px;">
+            工具栏  
+            </span>
+        </legend>
+        <div id="calcu-board">
+            <include file="Index:calcu_board" />
+        </div>
+    </div>
+    
+    <input type="hidden" id="model" value="{$model}" /> 
+    <input type="hidden" id="p" value="{$p}" /> 
+    <input type="hidden" id="psize" value="{$psize}" /> 
+    <input type="hidden" id="old_sql" value="{$old_sql}" />
+    <input type="hidden" id="show_sql" value="{$show_sql}" />
+
+    <!-- 数据表 -->
+    <div id="data-table" class="span10">
+    </div>
+
+</div>
+
+<script src="__JS__/calcu.js"></script>
+
+<include file="Public:footer" />

@@ -1,0 +1,35 @@
+<!--
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+-->
+
+<script src="__JS__/google/jsapi.js"></script>
+<script src="__JS__/draw.js"></script>
+<legend>
+    <span style="margin-right:20px;">
+        数据选择
+    </span>
+    <a class="btn btn-info" id="save-chart-btn" style="margin-left:20px;margin-bottom:5px;">
+        <i class="icon-camera icon-white"> </i>
+        Save
+    </a>
+</legend>
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" style="top:30%;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 id="myModalLabel"> <i class="icon-bookmark"> </i> 产品经理大人 </h4>
+    </div>
+    <div class="modal-body">
+        <p> 确定要把当前图表保存到历史数据中么，给你可爱的图表取个名字吧！默认为该图表的标题 O(∩_∩)O ~</p>
+        <input type="text" id="save-chart-title" placeholder="{$title}" style="margin:20px;" />
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true"> Cancel </button>
+        <button id="do-save-chart" class="btn btn-success"> Submit </button>
+    </div>
+</div>
+
+<div id="chart_div"></div>
+
+

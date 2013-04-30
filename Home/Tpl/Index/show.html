@@ -1,0 +1,38 @@
+<include file="Public:header" /> 
+<include file="Public:progress" />
+
+    <div class="row-fluid">
+        <div class="alert alert-block alert-success">
+            <h4> 提示 </h4>
+            <p style="line-height:35px;">
+            &nbsp;&nbsp;请选择您所需要的源数据,一张主表可以添加多个附表与之关联，选择完成后请点击下一步。
+            </p>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+
+    <div id="board" class="span2">
+        <legend>
+            <span style="margin:20px;">
+            工具栏  
+            </span>
+        </legend>
+        <div id="select-board">
+            <include file="Index:select_board" />
+        </div>
+    </div>
+    
+    <input type="hidden" id="model" value="{$model}" /> 
+    <input type="hidden" id="p" value="{$p}" /> 
+    <input type="hidden" id="psize" value="{$psize}" /> 
+
+    <!-- 数据表 -->
+    <div id="data-table" class="span10">
+    </div>
+
+</div>
+
+<script src="__JS__/show.js"></script>
+
+<include file="Public:footer" />

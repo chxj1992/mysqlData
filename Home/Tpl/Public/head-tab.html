@@ -1,0 +1,38 @@
+
+<ul class="nav nav-tabs">
+    <li id="kf-tab" class="active">
+    <a href="/#kf"> 
+        <i class="icon-list"></i>  
+        客服值班表 
+    </a>
+    </li>
+    <li id="wl-tab">
+    <a href="/#wl">
+        <i class="icon-list"></i>  
+        物流值班表
+    </a>
+    </li>
+    <li id="setting">
+    <a href="/User/setting/">
+        <i class="icon-user"></i>
+    </a>  
+    </li>
+
+    <?php
+        if ( in_array('3',$user_info['role']) ) {
+    ?>
+    <li id="manage">
+    <a href="/User/manage/">
+        <i class="icon-cog"></i>
+    </a>  
+    </li>
+    <?php
+        } 
+    ?>
+    <li id="logout">
+    <a href="/User/logout/">
+        <i class="icon-off"></i>
+    </a>  
+    </li>
+</ul>
+

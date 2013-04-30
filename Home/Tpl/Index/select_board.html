@@ -1,0 +1,63 @@
+
+    <!-- 选表工具面板 -->
+    <div id="tool-board" class="well well-large">
+        <div>
+            <h5>主表</h5>
+            <select class="span11" id="main-models">
+                <volist name="main_models" id="vo">
+                    <option value="{$key}">{$vo}</option>  
+                </volist>
+            </select>
+            <br />
+
+            <h5> 
+                附表 
+                <i class="icon-plus-sign" id="add-attach" style="margin-left:10px;"> </i>
+            </h5>
+            
+            <div id="attach-models">
+
+                <div style="display:none;" id="attach-eg">
+                    <div class="attach">
+                        <select class="span8 attach-models">
+                            <option value=""> 选择附表 </option>  
+                            <volist name="attach_models" id="vo">
+                                <option value="{$key}">{$vo}</option>  
+                            </volist>
+                        </select>
+                        <i class="icon-minus-sign del-attach" style="margin-left:20px;"> </i>
+                    </div>
+                </div>
+                <volist name="relation_res" id="vo">
+                    <div class="attach">
+                        <select class="span8 attach-models">
+                            <option value="{$key}"> {$vo} </option>  
+                            <?php
+                                $tmp = $key; 
+                            ?>
+                            <volist name="attach_models" id="vo">
+                                <?php
+                                if( $key == $tmp){
+                                    continue;  
+                                }
+                                ?>
+                                <option value="{$key}">{$vo}</option>  
+                            </volist>
+                        </select>
+                        <i class="icon-minus-sign del-attach" style="margin-left:20px;"> </i>
+                    </div>
+                </volist>
+
+            </div>
+
+        </div>
+        <br />
+        <hr />
+        <a class="btn btn-success offset0" id="submit-rela-btn">
+           Set
+        </a>
+        <a class="btn btn-info offset3" id="to-cal-btn">
+            Next 
+        </a>
+    </div>
+

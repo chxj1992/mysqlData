@@ -1,0 +1,108 @@
+
+    <!-- 画图工具面板 -->
+    <div id="tool-board" class="well well-large">
+
+        <br />
+        <h5> 
+            图表标题
+        </h5>
+        <input type="text" placeholder="{$title}" id="title" />
+        <h5> 
+            坐标名
+        </h5>
+        <div>
+            X: <input type="text" class="input-medium" placeholder="{$x_name}" id="x_name" />
+        </div>
+        <div>
+            Y: <input type="text" class="input-medium" placeholder="{$y_name}" id="y_name" />
+        </div>
+
+        <h5> 
+            图表类型
+        </h5>
+        <div class="type-div">
+            <select class="span6" name="type" id="chart-type">
+                <?php
+                    if ( $chart_type ) {
+                ?> 
+                <option value="{$chart_type}"> <?php echo getChartName($chart_type); ?> </option>  
+                <?php
+                    } 
+                ?>
+                <volist name="charts" id="vo">
+                    <?php
+                    if( $key == $chart_type){
+                        continue;  
+                    }
+                    ?>
+                    <option value="{$key}">{$vo}</option>  
+                </volist>
+            </select>
+        </div>
+
+        <h5> 
+            数据系列字段
+        </h5>
+        <select id="column-field" class="span7" name="field">
+            <option value="{$column_field}"><?php echo getOneField($column_field); ?> </option>  
+            <volist name="field" id="vo">
+                <?php
+                if ( $key == $column_field ) {
+                    continue;  
+                }
+                ?>
+                <option value="{$key}">{$vo}</option>  
+            </volist>
+        </select>
+
+        <h5> 
+            数据值字段
+            <i class="icon-plus-sign" id="add-field" style="margin-left:10px;"> </i>
+        </h5>
+        <div id="field-block">
+            <div style="display:none;" id="field-eg">
+                <div class="field-div">
+                    <select class="span7 data-field" name="field">
+                        <volist name="field" id="vo">
+                            <option value="{$key}">{$vo}</option>  
+                        </volist>
+                    </select>
+                    <i class="icon-minus-sign del-field" style="margin-left:10px;"> </i>
+                </div>
+            </div>
+
+            <volist name="data_field" id="vo">
+                <div class="field-div">
+                    <select class="span7 data-field" name="field">
+                        <option value="{$vo}"> <?php echo getOneField($vo); ?> </option>  
+                        <?php $tmp = $vo; ?>
+                        <volist name="field" id="vo">
+                            <?php
+                                if ( $key == $tmp ) {
+                                    continue;  
+                                }
+                            ?>
+                            <option value="{$key}">{$vo}</option>  
+                        </volist>
+                    </select>
+                    <i class="icon-minus-sign del-field" style="margin-left:10px;"> </i>
+                </div>
+            </volist>
+
+        </div>
+
+        <br />
+        <hr />
+        <a class="btn btn-warning offset0" id="submit-unset-btn">
+            Unset
+        </a>
+        <a class="btn btn-success offset0" id="submit-chart-btn">
+            Set
+        </a>
+        <a class="btn btn-info offset2" id="finish-chart-btn">
+            Finish
+        </a>
+        
+    </div>
+ 
+

@@ -1,0 +1,68 @@
+<include file="Public:header" /> 
+<include file="Public:progress" />
+
+    <div class="row-fluid">
+        <div class="alert alert-block alert-danger">
+            <h4> 提示 </h4>
+            <p style="line-height:35px;">
+            &nbsp;&nbsp;选择您需要的字段及对应的图表类型，系统将自动为您生成统计图表，完成后，您可以保存图表结果以便对其进行进一步分析。
+            </p>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+
+    <div id="board" class="span2">
+        <legend>
+            <span style="margin:20px;">
+            工具栏  
+            </span>
+        </legend>
+        <div id="select-board">
+            <include file="Index:chart_board" />
+        </div>
+    </div>
+    
+    <input type="hidden" id="sql" value="{$sql}" /> 
+     
+    <?php
+        if ( $chart_type  ) {
+    ?>
+    <div class="span10" id="chart-show">    
+        <include file="Index:draw" />
+    </div>
+    <?php
+        } else {
+    ?>
+        <div id="data-table" class="span10"></div>
+    <?php
+        }
+    ?>
+    
+    <div id="chart-data-block">
+        <input type="hidden" value="{$chart_type}" id="chart-type-v" />
+        <input type="hidden" value="{$title}" id="chart-title" />
+        <input type="hidden" id="column-field-name" value="{$column_name}" />
+        <div id="chart-column">
+            <volist name="column" id="vo">
+                <input class="column-field-v" type="hidden" value="{$vo}" />
+            </volist> 
+        </div>
+        <div id="chart-data">
+            <volist name="data" id="row" key="k">
+            <?php
+                $row_name = $key; 
+            ?> 
+                <volist name="row" id="vo">
+                    <input class="data-field-v row{$k}" row="{$k}" row_name="{$row_name}" type="hidden" value="{$vo}" />
+                </volist>
+            </volist> 
+        </div>
+    </div>
+        
+</div>
+
+
+<script src="__JS__/charts.js"></script>
+
+<include file="Public:footer" />

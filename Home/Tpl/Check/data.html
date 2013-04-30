@@ -1,0 +1,96 @@
+<include file="Public:header" /> 
+<include file="Public:progress2" />
+
+    <div class="row-fluid">
+        <div class="alert alert-block alert-warning">
+            <h4> 提示 </h4>
+            <p style="line-height:35px;">
+            &nbsp;&nbsp; 在这里您可以查看并导入您所保存的数据。
+            </p>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+
+    <div id="board" class="span2">
+        <legend>
+            <span style="margin:20px;">
+                Tips
+            </span>
+        </legend>
+    
+        <div id="tip-board" class="well well-large" >
+
+            <p style="margin-top:20px;"> 
+                <i class="icon-list">  </i> Import将把数据导入到数据处理页，导入数据之后，您可以继续对数据进行处理。
+            </p>
+            <br />
+        </div>
+    </div>
+    
+
+    <!-- 数据表 -->
+    <div id="data-table" class="span8">
+    <legend>
+        <span style="margin-right:20px;">
+            历史数据
+        </span>
+    </legend>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th> 数据名 </th>
+                    <th> 创建时间 </th>
+                    <th> 操作 </th>
+                </tr>
+            </thead>
+            <tbody>
+                <volist name="list" id="vo">
+                    <tr>
+                        <td>
+                            {$vo.name}
+                        </td>
+                        <td>
+                            {$vo.createtime}
+                        </td>
+                        <td>
+                            <a class="btn btn-warning btn-small import-data" data="{$vo.sql}">
+                               Import 
+                            </a>
+                            <a class="btn btn-danger btn-small del-data" data_id="{$vo.sql_id}">
+                               Delete
+                            </a>
+                        </td>
+                    </tr>
+                </volist>
+            </tbody>
+        </table>
+
+        <div class="pagination" style="margin-left:30px;">
+            {$page}
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" style="top:30%;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 id="myModalLabel">  <i class="icon-bookmark"> </i> 产品经理大人 </h4>
+    </div>
+    <div class="modal-body">
+        <p> 您确定要删除该数据么? 该操作不可恢复哦！( ⊙ o ⊙ )！ </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true"> Cancel </button>
+        <button class="btn btn-danger" data-dismiss="modal" id="sub-del-data" aria-hidden="true"> Sure </button>
+        <input type="hidden" id="data-del" value />
+    </div>
+</div>
+
+<script src="__JS__/check.js"></script>
+
+<include file="Public:footer" />

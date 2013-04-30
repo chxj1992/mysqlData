@@ -1,0 +1,27 @@
+.wrap {
+    margin-top:10px;
+}
+
+.muted {
+    color : #1000 !important;
+    font-size : 16px !important;
+    line-height : 20px !important;
+}
+
+.pagination a {
+    border-left-width: 1px !important;
+}
+
+#welcome-board p {
+    color:#999;
+}
+
+#banner {
+    cursor:pointer;
+}
+
+a:hover {
+    cursor:pointer;
+}
+
+
