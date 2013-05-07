@@ -28,6 +28,7 @@ class IndexAction extends Action {
         }
         if ( $_POST['refresh'] ) {
             setcookie('relation',false,time()-86400,'/Index/data');   
+            setcookie('relation_res',false,time()-86400);   
         }
         $model = filterModel($model);    
         setcookie('model',$model,time()+86400,'/Index/show');
@@ -121,7 +122,7 @@ class IndexAction extends Action {
             setcookie('show_sql',$sql,time()+86400,'/Index/calcu');
             setcookie('condition',false,time()-86400,'/Index/calcu');
         } elseif ( $_COOKIE['old_sql'] ) {
-            $sql = $_COOKIE['old_sql']; 
+            $sql =  $_COOKIE['old_sql'];
         } else {
             $this->display();
             return ;
@@ -129,23 +130,32 @@ class IndexAction extends Action {
         if ( $_POST['field'] ) {
             setcookie('field',$_POST['field'],time()+86400,'/Index/calcu');
         }
+
         setcookie('old_sql',$sql,time()+86400,'/Index/calcu');
-        
+        $sql_key = $_COOKIE['sql_key'] ? $_COOKIE['sql_key'] : 1;
+
+        if ( $_POST['back'] AND $_POST['back_sql'] ) {
+            setcookie('sql_key',$_POST['key'],time()+86400,'/Index/calcu');
+            setcookie('old_sql',$_POST['back_sql'],time()+86400,'/Index/calcu');
+            setcookie('condition',$_POST['back_condition'],time()+86400,'/Index/calcu');
+        }
+
+
         $p = intval($_REQUEST['p']) ? $_REQUEST['p'] : 1;
         $psize = intval($_COOKIE['psize']) ? $_COOKIE['psize'] : 25;
-
         $this->assign('field',json_decode($_COOKIE['field'],true));
         $this->assign('condition',json_decode($_COOKIE['condition'],true));
+        $this->assign('condition_str',$_COOKIE['condition']);
         $this->assign('functions',C('FUNCTIONS'));
         $this->assign('p',$p);
         $this->assign('psize',$psize);
         $this->assign('old_sql',$sql);
         $this->assign('show_sql',$_COOKIE['show_sql']);
+        $this->assign('sql_key',$sql_key);
 
         $this->display();
     
     } //End Of Func calcu
-
 
 
     /** 
@@ -160,8 +170,10 @@ class IndexAction extends Action {
         if ( !isSelect($_POST['sql']) ) {
             return T('参数错误,SQL语句必须以SELECT开头'); 
         }
+        setcookie('old_sql',$_POST['sql'],time()+86400,'/Index/calcu');
         if ( $_POST['refresh'] ) {
             setcookie('condition',false,time()-86400,'/Index/calcu');
+            setcookie('sql_key',false,time()-86400,'/Index/calcu');
         }
         $sql = sqlWithoutLimit($_POST['sql']);
         $condition = $this->gatherCondition($_REQUEST);
@@ -178,13 +190,13 @@ class IndexAction extends Action {
         $show = $Page->show();
 
         //设置外层sql
-        if ( empty($condition) ) {
-            setcookie('old_sql',$_POST['sql'],time()+86400,'/Index/calcu');
-        } else {
+        if ( !empty($condition) ) {
             setcookie('old_sql',$result['sql'],time()+86400,'/Index/calcu');
             setcookie('condition',json_encode($condition),time()+86400,'/Index/calcu');
         }
-
+        
+        setcookie('sql_key',$_POST['key'],time()+86400,'/Index/calcu');
+        
         //字段映射表
         $field = getField($result['data'][0]);
         $field_str = json_encode($field);
@@ -200,7 +212,7 @@ class IndexAction extends Action {
         $this->ajaxReturn($html,'success',1); 
 
     } //End Of Func doCalcu
-     
+        
 
     /** 
      * gatherCondition 收集条件

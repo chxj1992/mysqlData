@@ -29,29 +29,14 @@ $(document).ready(function(){
     $("#main-models").change(function(){
         var model = $(this).val();
         $.ajax({
-            url:"/Index/data/",
+            url:"/Index/show/",
             type:"POST",
-            dataType:'json',
             data:{
                 model:model,
                 refresh:true,
             },
             success:function(data,status){
-                $.ajax({
-                    url:"/Index/show/",
-                    type:"POST",
-                    dataType:'json',
-                    data:{
-                        model:model,
-                    },
-                    success:function(data,status){
-                        if ( data.status != 0 ) {
-                            window.location.href = "/Index/show";
-                        } else {
-                            $("#data-table").html("<h4>"+data.info+"</h4>");
-                        }
-                    }
-                });
+                window.location.reload();
             },
         });
 

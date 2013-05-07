@@ -44,7 +44,13 @@
             数据系列字段
         </h5>
         <select id="column-field" class="span7" name="field">
+            <?php
+                if ( $column_field ) {
+            ?> 
             <option value="{$column_field}"><?php echo getOneField($column_field); ?> </option>  
+            <?php
+                } 
+            ?>
             <volist name="field" id="vo">
                 <?php
                 if ( $key == $column_field ) {

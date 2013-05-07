@@ -48,6 +48,29 @@ class CommonView extends ViewModel {
 
     } //End Of Func get
     
+
+    /** 
+     * format brief intro
+     *
+     */
+    private function format( $data ) {
+        
+        foreach ( $data as &$row ) {
+            if ( isset($row['user_lasttime']) ) {
+                $row['user_lasttime'] = date('Y-m-d H:i:s',$row['user_lasttime']);
+            }
+            if ( isset($row['user_regtime']) ) {
+                $row['user_regtime'] = date('Y-m-d H:i:s',$row['user_regtime']);
+            }
+            if ( isset($row['sendtime']) ) {
+                $row['sendtime'] = date('Y-m-d H:i:s',$row['sendtime']);
+            }
+        } 
+
+        return $data;  
+
+    } //End Of Func format
+
         
     /** 
      * chartData 获取画图数据

@@ -5,6 +5,7 @@ $(document).ready(function(){
     var sql = $("#old_sql").val();
     var p = $("#p").val();
     var psize = $("#psize").val();
+    var key = $("#submit-back-btn").attr('sql-key');
     $.ajax({
             url:"/Index/doCalcu/",
             type:"POST",
@@ -12,7 +13,8 @@ $(document).ready(function(){
             data:{
                 sql:sql,
                 p:p,
-                psize:psize
+                psize:psize,
+                key:key,
             },
             success:function(data,status){
                 if ( data.status != 0 ) {
@@ -127,11 +129,17 @@ $(document).ready(function(){
         return order;
     }
 
-    //提交查询参数
-    $("#submit-calcu-btn").click(function(){
+    function getCalcuData(){
+
+        var key = $("#submit-back-btn").attr('sql-key');
+        key = parseFloat(key) + 1;
+        var sql = $("#sql").val();
+        var condition = $("#condition_str").val();
+        localStorage.setItem('sql'+key,[sql]);
+        localStorage.setItem('condition'+key,[condition]);
+
         var data = Array(); 
         var form_sql = $("#form-sql").val();
-        var sql = $("#sql").val();
         var psize = $("#limit").val();
         var show = getShow();
         var where = getWhere();
@@ -142,19 +150,28 @@ $(document).ready(function(){
             sql = form_sql;
             data = {
                 sql:sql,
+                key:key,
             }; 
         } else {
             data = {
-                    sql:sql,
-                    show:show,
-                    where:where,
-                    group:group,
-                    order:order,
-                    psize:psize,
-                    my_field:field,
-                };
+                sql:sql,
+                show:show,
+                where:where,
+                group:group,
+                order:order,
+                psize:psize,
+                my_field:field,
+                key:key,
+            };
         }
-            
+        return data;
+    }
+
+    //提交查询参数
+    $("#submit-calcu-btn").click(function(){
+
+        var data = getCalcuData(); 
+
         $.ajax({
             url:"/Index/doCalcu/",
             type:"POST",
@@ -173,8 +190,33 @@ $(document).ready(function(){
     });
     
 
+    $("#submit-back-btn").click(function(){
+        var key = $(this).attr('sql-key');
+        var sql = localStorage.getItem('sql'+key);
+        var condition = localStorage.getItem('condition'+key);
+        localStorage.removeItem('sql'+key);
+        localStorage.removeItem('condition'+key);
+        key = parseFloat(key) - 1;
+        $.ajax({
+            url:"/Index/calcu/",
+            type:"POST",
+            data:{
+                back:true,
+                back_sql:sql,
+                back_condition:condition,
+                key:key
+            },
+            success:function(data,status){
+                window.location.href="/Index/calcu";
+            },
+        });
+    });
+
+
+    console.log(localStorage);
     $("#submit-unset-btn").click(function(){
         var sql = $("#show_sql").val();
+        localStorage.clear();
         $.ajax({
             url:"/Index/doCalcu/",
             type:"POST",
@@ -240,5 +282,6 @@ $(document).ready(function(){
         $(".isadvance-btn").toggle('slow');
         $(".mode").toggle('slow');
     });
+
 
 });

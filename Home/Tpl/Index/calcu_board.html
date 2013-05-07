@@ -1,8 +1,9 @@
 
     <!-- 计算工具面板 -->
     <div id="tool-board" class="well well-large">
-        <a class='btn btn-danger offset6 isadvance-btn'>Advenced</a>       
-        <a class='btn btn-warning offset6 isadvance-btn' style="display:none;">Nomal</a>       
+        <a class='btn' id="submit-back-btn" sql-key="{$sql_key}"> <i class="icon-repeat"> </i> 撤销</a>       
+        <a class='btn btn-danger offset3 isadvance-btn'>Advenced</a>       
+        <a class='btn btn-warning offset3 isadvance-btn' style="display:none;">Nomal</a>       
         <br />
         <div id="normal" class="mode">
             <h5> 
@@ -19,51 +20,31 @@
                         </select>
 
                         <select class="span4 show" name="func">
-                            <option value="">  </option>  
-                            <option value="SUM"> SUM </option>  
-                            <option value="DATE_FORMAT"> DATE_FORMAT </option>  
-                            <option value="MAX"> MAX </option>  
-                            <option value="MIN"> MIN </option>  
-                            <option value="COUNT"> COUNT </option>  
+                            <volist name="functions" id="vo">
+                                <option value="{$key}"> {$vo} </option>  
+                            </volist>
                         </select>
                         <input type="text" class="input span3 show" name="param" />
                         <i class="icon-minus-sign del-show"> </i>
                     </div>
                 </div>
-                <?php
-                ?>
+
                 <volist name="condition.show" id="show">
                     <div class="show-div">
                         <select name="field" class="span4 show">
-                            <?php
-                                if ( $show['func'] ) { 
-                                    $show['field'] = $show['field'].'1'.$show['func'];
-                                }
-                            ?> 
-
-                            <option value="{$show.field}"> 
+                            <option value="{$show.field}"><?php echo getOneField($show['field']); ?> </option>  
+                            <volist name="condition.show" id="vo">
                                 <?php
-                                    echo getOneField($show['field']); 
+                                    if ( $show['field'] == $vo['field'] ) { 
+                                        continue;
+                                    }
                                 ?> 
-                            </option>  
-                            <volist name="field" id="vo">
-                                <?php
-                                if( $key == $show['field']){
-                                    continue;  
-                                }
-                                ?>
-                                <option value="{$key}">{$vo}</option>  
+                                <option value="{$vo.field}"><?php echo getOneField($vo['field']); ?> </option>  
                             </volist>
                         </select>
 
                         <select class="span4 show" name="func">
-                            <option value="{$show.func}"> <?php echo getFuncName($show['func']); ?> </option>  
                             <volist name="functions" id="vo">
-                                <?php
-                                if( $key == $show['func']){
-                                    continue;  
-                                }
-                                ?>
                                 <option value="{$key}"> {$vo} </option>  
                             </volist>
                         </select>
@@ -184,4 +165,5 @@
             Next
         </a>
     </div>
+    
 
