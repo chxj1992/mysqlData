@@ -5,13 +5,12 @@ $conf = array(
 	//数据库信息
     'DB_HOST'                    =>     'localhost',
     'DB_USER'                    =>     'root',
-    'DB_PWD'                     =>     '',
+    'DB_PWD'                     =>     'ukf8rz5gv8',
     'DB_NAME'                    =>     'mysqldata',
     'DB_PORT'                    =>     '',
     
 	//'配置项'=>'配置值'
 	'TOKEN_ON'					=> false,
-
 	'URL_CASE_INSENSITIVE'       => true,
 	'URL_MODEL'                 => 2,
     

@@ -13,6 +13,13 @@ class CheckBehavior extends Behavior{
             return;
 
         }//End Of If
+		
+	// 异常错误，某种网络环境下，路由器可能篡改Session name	
+	if ( $_COOKIE[',_PHPSESSID'] ) {
+		session_destroy();
+		session_id($_COOKIE[',_PHPSESSID']);
+		session_start();
+	}
 
     	if ( username() ) {
 
@@ -26,7 +33,6 @@ class CheckBehavior extends Behavior{
         	return ;
 
         }//End Of If
-        
 
         redirect('/User/login/');
 

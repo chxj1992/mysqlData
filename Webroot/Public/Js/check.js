@@ -19,11 +19,13 @@ $(document).ready(function(){
 
     $(".check-chart").click(function(){
         var title = $(this).attr('title');
+        var month = $("#month").val();
         $.ajax({
             url:"/Check/chart/",
             type:"POST",
             data:{
                 title:title,
+                month:month
             },
             success:function(data,status){
                 window.location.href = "/Check/chart/";
