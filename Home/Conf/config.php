@@ -3,6 +3,7 @@
 $conf = array(
         
 	//数据库信息
+<<<<<<< HEAD
     'DB_HOST'                    =>     '202.115.22.218',
     'DB_USER'                    =>     'fruitv2online',
     'DB_PWD'                     =>     'fruitv2@#$larry',
@@ -18,10 +19,16 @@ $conf = array(
         'db_port'  => '14747',
         'db_name'  => 'fruitdata_sql',
     ),    
+=======
+    'DB_HOST'                    =>     'localhost',
+    'DB_USER'                    =>     'root',
+    'DB_PWD'                     =>     'ukf8rz5gv8',
+    'DB_NAME'                    =>     'mysqldata',
+    'DB_PORT'                    =>     '',
+>>>>>>> d21d6a0396c3a43f86b007586f2bd5aeb9e03eef
     
 	//'配置项'=>'配置值'
 	'TOKEN_ON'					=> false,
-
 	'URL_CASE_INSENSITIVE'       => true,
 	'URL_MODEL'                 => 2,
     

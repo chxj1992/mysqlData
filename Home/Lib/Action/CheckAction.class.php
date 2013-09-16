@@ -135,8 +135,8 @@ class CheckAction extends Action {
         }
         setcookie('psize',$psize,time()+86400,'/Check/data');
 
-        $count = M('Sql','fruit_',"DB_CONFIG1")->count();   
-        $list = M('Sql','fruit_',"DB_CONFIG1")->page("$p,$psize")->order('sql_id DESC')->select();   
+        $count = M('Sql','data_',"DB_CONFIG1")->count();   
+        $list = M('Sql','data_',"DB_CONFIG1")->page("$p,$psize")->order('sql_id DESC')->select();   
 
         loadHelper('Page.class.php');
         $Page   = new Page($count,$psize);
@@ -163,7 +163,7 @@ class CheckAction extends Action {
         $data['name'] = $_REQUEST['sql_name'] ? $_REQUEST['sql_name'] : '未命名数据';
         $data['createtime'] = date('Y-m-d H:i:s');
 
-        $res = M('Sql','fruit_',"DB_CONFIG1")->add($data);   
+        $res = M('Sql','data_',"DB_CONFIG1")->add($data);   
 
         if ( $res ) {
             $this->ajaxReturn(1,'success',1); 
@@ -183,7 +183,7 @@ class CheckAction extends Action {
             return T('参数错误'); 
         } 
         $where['sql_id'] = $sql_id;
-        $res = M('Sql','fruit_',"DB_CONFIG1")->where($where)->delete();   
+        $res = M('Sql','data_',"DB_CONFIG1")->where($where)->delete();   
 
         if ( $res === false ) {
             return T('fail');
