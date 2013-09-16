@@ -4,7 +4,7 @@ return array(
     
     'USERS' => array(
 
-        'test' => '123',
+        'admin' => 'cd32d5e86e',
 
     ), 
 

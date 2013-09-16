@@ -10,6 +10,9 @@ return array(
         'COUNT' => 'COUNT',
         'MAX' => 'MAX',
         'MIN' => 'MIN',
+        'FLOOR' => 'FLOOR',
+        'CEIL' => 'CEIL',
+        'ROUND' => 'ROUND',
 
     ), 
 

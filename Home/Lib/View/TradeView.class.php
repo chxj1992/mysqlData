@@ -31,7 +31,9 @@ class TradeView extends CommonView {
     //用户
     protected $User = array(
         'User'=>array(
-            'uname','email','point','regip'=>'user_regip','regtime'=>'user_regtime','lasttime'=>'user_lasttime','unread','isdel'=>'user_isdel',
+            'uname','email','point','regip'=>'regip','unread','isdel'=>'user_isdel',
+             '_fields' => array('FROM_UNIXTIME(User.lasttime) AS user_lasttime',
+                'FROM_UNIXTIME(User.regtime) AS user_regtime'),
             '_on'=>'Trade.uid=User.uid'),
     );
   

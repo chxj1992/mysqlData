@@ -185,7 +185,13 @@ class CommonView extends ViewModel {
     private function decorateWhere($sql,$where,$salt) {
 
         foreach ( $where as $row ) {
+
+            $row['sign'] = $this->convertSign($row['sign']);
             if ( $row['sign'] == 'LIKE' ) {
+                $sql_where_arr[] = " $salt.`".$row['field']."`".$row['sign']."'%".$row['value']."%' ";
+                continue;
+            }
+            if ( $row['sign'] == 'NOT LIKE' ) {
                 $sql_where_arr[] = " $salt.`".$row['field']."`".$row['sign']."'%".$row['value']."%' ";
                 continue;
             }
@@ -200,6 +206,28 @@ class CommonView extends ViewModel {
         $sql .= 'AND'.$sql_where;
 
         return $sql;
+
+    }
+
+    private function convertSign($sign) {
+
+            switch ($sign) {
+            
+                case 'lt':
+                    $sign = '<';
+                    break;
+
+                case 'gt':
+                    $sign = '>';
+                    break;
+
+                case 'neq':
+                    $sign = '<>';
+                    break;
+            
+            } //End of Switch
+
+            return $sign;
 
     }
         

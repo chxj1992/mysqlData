@@ -2,10 +2,12 @@
 //数据选择页
 $(document).ready(function(){
 
+
     var sql = $("#old_sql").val();
     var p = $("#p").val();
     var psize = $("#psize").val();
     var key = $("#submit-back-btn").attr('sql-key');
+
     $.ajax({
             url:"/Index/doCalcu/",
             type:"POST",
@@ -27,7 +29,7 @@ $(document).ready(function(){
                 }
             }
     });
-
+    
 
     $("#add-show").click(function(){
         var show_eg = $("#show-eg").html(); 
@@ -207,7 +209,7 @@ $(document).ready(function(){
                 key:key
             },
             success:function(data,status){
-                window.location.href="/Index/calcu";
+                window.location.reload();
             },
         });
     });

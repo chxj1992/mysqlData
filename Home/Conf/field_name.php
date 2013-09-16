@@ -61,6 +61,7 @@ return array(
         'regip'=>'用户注册IP',
         'user_regtime'=>'用户注册时间',
         'user_lasttime'=>'用户最后登陆时间',
+        'discount'=>'打折活动',
         
     ), 
 

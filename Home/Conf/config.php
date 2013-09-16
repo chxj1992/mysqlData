@@ -3,11 +3,21 @@
 $conf = array(
         
 	//数据库信息
-    'DB_HOST'                    =>     'localhost',
-    'DB_USER'                    =>     'root',
-    'DB_PWD'                     =>     '',
-    'DB_NAME'                    =>     'mysqldata',
-    'DB_PORT'                    =>     '',
+    'DB_HOST'                    =>     '202.115.22.218',
+    'DB_USER'                    =>     'fruitv2online',
+    'DB_PWD'                     =>     'fruitv2@#$larry',
+    'DB_NAME'                    =>     'fruitv2',
+    'DB_PORT'                    =>     '14747',
+
+    //SQL数据库配置
+    'DB_CONFIG1' => array(
+        'db_type'  => 'mysqli',
+        'db_user'  => 'root',
+        'db_pwd'   => 'ukf8rz5gv8',
+        'db_host'  => 'localhost',
+        'db_port'  => '14747',
+        'db_name'  => 'fruitdata_sql',
+    ),    
     
 	//'配置项'=>'配置值'
 	'TOKEN_ON'					=> false,
@@ -15,8 +25,17 @@ $conf = array(
 	'URL_CASE_INSENSITIVE'       => true,
 	'URL_MODEL'                 => 2,
     
+	//'DB_SQL_BUILD_CACHE' 		 =>     TRUE,
+	//'DB_FIELDS_CACHE'			 =>     TRUE,
     'DB_PREFIX'                  => 'cart_',
+    //'DB_PREFIX'                  => FALSE,
+	//'DATA_CACHE_TYPE' 			 =>   	'file',
+	//'DATA_CACHE_PATH'			 =>		'/tmp/delivery/Temp/',
 
+    //模板主题名称
+	//'DEFAULT_THEME'              =>     'default',
+    //'TMPL_CACHE_ON'              =>     TRUE,
+	
 	//调试相关设置
 	'SHOW_PAGE_TRACE'			 =>		 TRUE,
 	'TRACE_CHUNK_SPILK'			 => 	 TRUE,
@@ -42,9 +61,7 @@ $field_name = require 'field_name.php';
 $functions= require 'functions.php';
 $charts = require 'chart_type.php';
 $user = require 'user.php';
-$save_db = require 'save_db.php';
-
-$conf = array_merge($conf,$model_name,$field_name,$functions,$charts,$user,$save_db);
+$conf = array_merge($conf,$model_name,$field_name,$functions,$charts,$user);
 
 return $conf;
 

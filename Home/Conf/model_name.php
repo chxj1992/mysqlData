@@ -3,7 +3,7 @@
 return array(
     
     'MAIN_MODEL' => array(
-        'Item','Order','Trade','User','UserAddress'
+        'Item','Order','Trade','User','UserAddress','ItemView'
     ),
 
     'MODEL_NAME' => array(
@@ -17,6 +17,8 @@ return array(
         'User' => '用户表',
         'DeliMan' => '送货员表',
         'UserAddress' => '用户地址表',
+        'Discount' => '打折活动表',
+        'ItemView' => '商品浏览表',
 
     ), 
 

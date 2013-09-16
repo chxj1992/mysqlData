@@ -69,7 +69,7 @@ function getField( $data ) {
         }
         if( strpos($k,'1') ) {
             $f_arr = explode('1',$k);
-            $res = C('FIELD_NAME')[$f_arr[0]].$f_arr[1];
+            $res = C('FIELD_NAME')[$f_arr[0]].'_'.$f_arr[1];
         } 
         $result[$k] = $res;
     }
@@ -90,7 +90,7 @@ function getOneField( $k ) {
     }
     if( strpos($k,'1') ) {
         $f_arr = explode('1',$k);
-        $res = C('FIELD_NAME')[$f_arr[0]].$f_arr[1];
+        $res = C('FIELD_NAME')[$f_arr[0]].'_'.$f_arr[1];
     } 
 
     return $res;

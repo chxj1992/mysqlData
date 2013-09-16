@@ -7,10 +7,10 @@
     define('APP_PATH','../Home/');
     
     //碎片路径
-    define('RUNTIME_PATH','/tmp/mysqlData/');
+    define('RUNTIME_PATH','/tmp/fruitData/');
     
     //日志路径
-    define('LOG_PATH','/var/log/mysqlData/Home');
+    define('LOG_PATH','/var/log/fruitData/Home');
     
     //Webroot
     define('WEB_ROOT',dirname(__FILE__));

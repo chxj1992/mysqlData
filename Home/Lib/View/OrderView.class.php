@@ -23,7 +23,7 @@ class OrderView extends CommonView {
     protected $Trade = array(
         'Trade'=>array('status'=>'trade_status','receiver_name',
                        'receiver_address','receiver_link',
-                       'payment','posttime','deli_status','deli_man',
+                       'payment','posttime','deli_status','deli_man','is_mobile_discount',
             '_on'=>'Orders.tradeid=Trade.tradeid',
             '_fields' => array('FORMAT(Trade.totalfee/100,2) AS totalfee',
                         'FROM_UNIXTIME(Trade.paytime) AS paytime',
@@ -42,12 +42,13 @@ class OrderView extends CommonView {
         ),
     );
     
+
     //规格
     protected $Spec = array(
         'ProductSpec'=>array('_on'=>'Orders.productid=ProductSpec.productid'),
         'Specval'=>array('name'=>'specval_name','_on'=>'Specval.specvalid=ProductSpec.specvalid'),
     );
-    
+
 
     //关联表
     public $_relation = array('Trade','Item','Spec');

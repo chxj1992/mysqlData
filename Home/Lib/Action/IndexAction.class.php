@@ -132,14 +132,22 @@ class IndexAction extends Action {
         }
 
         setcookie('old_sql',$sql,time()+86400,'/Index/calcu');
-        $sql_key = $_COOKIE['sql_key'] ? $_COOKIE['sql_key'] : 1;
-
         if ( $_POST['back'] AND $_POST['back_sql'] ) {
             setcookie('sql_key',$_POST['key'],time()+86400,'/Index/calcu');
             setcookie('old_sql',$_POST['back_sql'],time()+86400,'/Index/calcu');
             setcookie('condition',$_POST['back_condition'],time()+86400,'/Index/calcu');
+            $condition = json_decode($_POST['back_condition'],true);
+            foreach ( $condition['show'] as $row ) {
+                $field = $row['field'];
+                if ( $row['func'] ) {
+                    $field .= '1'.$row['func']; 
+                }
+                $fields[$field] = getOneField($field);
+            }
+            setcookie('field',json_encode($fields),time()+86400,'/Index/calcu');
         }
 
+        $sql_key = $_COOKIE['sql_key'] ? $_COOKIE['sql_key'] : 0;
 
         $p = intval($_REQUEST['p']) ? $_REQUEST['p'] : 1;
         $psize = intval($_COOKIE['psize']) ? $_COOKIE['psize'] : 25;
@@ -200,7 +208,7 @@ class IndexAction extends Action {
         //字段映射表
         $field = getField($result['data'][0]);
         $field_str = json_encode($field);
-        setcookie('field',json_encode($field),time()+86400,'/Index/calcu');
+        setcookie('field',$field_str,time()+86400,'/Index/calcu');
         $this->assign('field_str',$field_str);
         $this->assign('data',$result['data']);
         $this->assign('sql',$result['sql']);

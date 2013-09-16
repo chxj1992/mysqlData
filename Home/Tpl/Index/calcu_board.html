@@ -10,6 +10,7 @@
                 查询字段(SELECT)   
                 <i class="icon-plus-sign" id="add-show" style="margin-left:10px;"> </i>
             </h5>
+
             <div id="show-block">
                 <div style="display:none;" id="show-eg">
                     <div class="show-div">
@@ -30,11 +31,19 @@
                 </div>
 
                 <volist name="condition.show" id="show">
+                <?php
+                    if ( $show['func'] ) {
+                        $show['field'] = $show['field'].'1'.$show['func'];
+                    }
+                ?>
                     <div class="show-div">
                         <select name="field" class="span4 show">
                             <option value="{$show.field}"><?php echo getOneField($show['field']); ?> </option>  
                             <volist name="condition.show" id="vo">
                                 <?php
+                                    if ( $vo['func'] ) {
+                                        $vo['field'] = $vo['field'].'1'.$vo['func'];
+                                    }
                                     if ( $show['field'] == $vo['field'] ) { 
                                         continue;
                                     }
@@ -48,7 +57,7 @@
                                 <option value="{$key}"> {$vo} </option>  
                             </volist>
                         </select>
-                        <input type="text" class="input span3 show" name="param" value="{$show.param}" />
+                        <input type="text" class="input span3 show" name="param" />
                         <i class="icon-minus-sign del-show"> </i>
                     </div>
                 </volist>
@@ -70,10 +79,11 @@
                         </select>
                         <select class="span3" name="sign">
                             <option value="="> = </option>  
-                            <option value="<"> &lt; </option>  
-                            <option value=">"> &gt; </option>  
-                            <option value="<>"> &lt;&gt; </option>  
+                            <option value="lt"> &lt; </option>  
+                            <option value="gt"> &gt; </option>  
+                            <option value="neq"> &lt;&gt; </option>  
                             <option value="LIKE"> LIKE </option>  
+                            <option value="NOT LIKE"> NOT LIKE </option>  
                             <option value="IN"> IN </option>  
                         </select>
                         <input type="text" class="input span4" name="value" />
